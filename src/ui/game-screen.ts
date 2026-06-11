@@ -111,7 +111,12 @@ export function renderGameScreen(ctx: AppContext, levelIndex: number): void {
   input.setAttribute('autocorrect', 'off');
   input.setAttribute('aria-hidden', 'true');
   screen.appendChild(input);
-  const focusInput = () => input.focus({ preventScroll: true });
+  // Never focus during the reward playground — focus would summon the mobile
+  // keyboard, and every toy tap would make it flicker hide/show.
+  const focusInput = () => {
+    if (phase === 'reward') return;
+    input.focus({ preventScroll: true });
+  };
   screen.addEventListener('pointerdown', (ev) => {
     sounds.unlock();
     // Let real buttons handle their own clicks without stealing focus back
@@ -285,6 +290,7 @@ export function renderGameScreen(ctx: AppContext, levelIndex: number): void {
     } else if (phase === 'question') {
       phase = 'reward';
       engine = null;
+      input.blur(); // dismiss the mobile keyboard for the playground
       sounds.fanfare();
       mascot.celebrate();
       recordItemDone(settings.language, levelIndex, itemIndex);
