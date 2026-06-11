@@ -33,6 +33,24 @@ const ctx: AppContext = {
   }
 };
 
+// When an updated service worker takes over, reload once so new versions show
+// up on the first visit instead of the second. The guard skips the very first
+// install (the page is already the newest version) and prevents reload loops.
+if ('serviceWorker' in navigator) {
+  let hadController = !!navigator.serviceWorker.controller;
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (!hadController) {
+      hadController = true;
+      return;
+    }
+    window.location.reload();
+  });
+  // Long-lived tabs (the game tends to stay open) re-check for updates hourly.
+  navigator.serviceWorker.ready.then((reg) => {
+    window.setInterval(() => reg.update().catch(() => {}), 60 * 60 * 1000);
+  });
+}
+
 // One background theme per visit, picked at random (classes in main.css).
 const THEMES = [
   'theme-golden',

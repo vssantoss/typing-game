@@ -14,7 +14,7 @@ export default defineConfig({
         short_name: 'Type&Tell',
         description: 'A happy typing game: type the sentence, answer the question, play with the sounds!',
         theme_color: '#ffd166',
-        background_color: '#ffe8c4',
+        background_color: '#ffe9c2',
         display: 'standalone',
         orientation: 'landscape',
         icons: [
