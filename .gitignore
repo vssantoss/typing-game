@@ -1,0 +1,15 @@
+node_modules/
+dist/
+dev-dist/
+
+# planning notes with personal context — kept local for now
+docs/
+
+# editor/OS noise
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# logs
+*.log
