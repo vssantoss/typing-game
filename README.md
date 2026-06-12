@@ -28,9 +28,9 @@ Vanilla TypeScript + Vite. No framework, no server, no tracking. Relative asset 
 ## Run it
 
 ```bash
-npm install
-npm run dev       # dev server
-npm test          # typing-engine unit tests (vitest)
-npm run build     # type-check + production build + service worker
-npm run preview   # serve the production build
+pnpm install
+pnpm dev          # dev server
+pnpm test         # typing-engine unit tests (vitest)
+pnpm build        # type-check + production build + service worker
+pnpm preview      # serve the production build
 ```
