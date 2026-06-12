@@ -21,8 +21,8 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['icons/icon.svg'],
       manifest: {
-        name: 'Type & Tell',
-        short_name: 'Type&Tell',
+        name: 'Type & Play',
+        short_name: 'Type&Play',
         description: 'A happy typing game: type the sentence, answer the question, play with the sounds!',
         theme_color: '#ffd166',
         background_color: '#ffe9c2',

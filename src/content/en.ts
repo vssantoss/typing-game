@@ -2,7 +2,7 @@ import type { ContentPack } from './types';
 
 export const en: ContentPack = {
   ui: {
-    appName: 'Type & Tell',
+    appName: 'Type & Play',
     tagline: 'Type it. Answer it. Play the sounds!',
     play: 'Play',
     settings: 'Parents Area',

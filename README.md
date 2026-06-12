@@ -1,4 +1,4 @@
-# Type & Tell
+# Type & Play
 
 A colorful, sound-rich typing game for kids. Type a sentence, answer a comprehension question about it, then celebrate in a playground of tappable sound toys. Built with positive reinforcement only — there is no way to fail, only ways to succeed.
 
