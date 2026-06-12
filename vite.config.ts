@@ -1,7 +1,18 @@
+import { execSync } from 'node:child_process';
 import { defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
 
+let commit = 'local';
+try {
+  commit = execSync('git rev-parse --short HEAD').toString().trim();
+} catch {
+  // not a git checkout (e.g. source archive) — keep the fallback
+}
+
 export default defineConfig({
+  define: {
+    __BUILD_INFO__: JSON.stringify({ commit, builtAt: new Date().toISOString() })
+  },
   // Relative base so the same build works as a PWA, inside Electron (file://)
   // and inside Capacitor webviews.
   base: './',

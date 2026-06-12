@@ -375,6 +375,14 @@ body.theme-lemon {
   padding: 6px 4px 24px;
 }
 
+.build-info {
+  font-size: 0.72rem;
+  color: var(--ink-soft);
+  opacity: 0.8;
+  padding: 4px 0 10px;
+  text-align: center;
+}
+
 .setting-row {
   display: flex;
   align-items: center;

@@ -221,4 +221,11 @@ export function renderSettingsScreen(ctx: AppContext): void {
   });
   resetRow.append(resetText, resetBtn);
   list.appendChild(resetRow);
+
+  // build stamp (commit + build time), for checking which version is deployed
+  const build = document.createElement('div');
+  build.className = 'build-info';
+  const when = new Date(__BUILD_INFO__.builtAt);
+  build.textContent = `${__BUILD_INFO__.commit} · ${when.toLocaleString()}`;
+  screen.appendChild(build);
 }
