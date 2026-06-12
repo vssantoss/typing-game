@@ -12,6 +12,12 @@ export interface Level {
   items: SentenceItem[];
 }
 
+/** "What is it?" game: an emoji is shown, the kid types its name. */
+export interface ObjectItem {
+  emoji: string;
+  name: string;
+}
+
 export interface UiStrings {
   appName: string;
   tagline: string;
@@ -21,6 +27,8 @@ export interface UiStrings {
   next: string;
   typeIt: string;
   nowAnswer: string;
+  objectsTitle: string;
+  objectsPrompt: string;
   hint: string;
   stars: string;
   levelComplete: string;
@@ -60,4 +68,5 @@ export interface UiStrings {
 export interface ContentPack {
   ui: UiStrings;
   levels: Level[];
+  objects: ObjectItem[];
 }

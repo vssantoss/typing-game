@@ -1,6 +1,6 @@
 import type { ContentPack } from '../content/types';
 
-export type ScreenName = 'home' | 'game' | 'settings';
+export type ScreenName = 'home' | 'game' | 'objects' | 'settings';
 
 export interface AppContext {
   root: HTMLElement;

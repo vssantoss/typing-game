@@ -417,10 +417,41 @@
   }
 }
 
+/* ---------- objects game ("What is it?") ---------- */
+.object-display {
+  font-size: clamp(4.2rem, 16vmin, 7.5rem);
+  line-height: 1;
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: clamp(14px, 3vmin, 26px) clamp(24px, 5vmin, 44px);
+  box-shadow: var(--block-shadow);
+  animation: object-bob 3s ease-in-out infinite;
+}
+
+@keyframes object-bob {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-7px) rotate(2deg); }
+}
+
+/* hint: the next letter peeks out of its slot for a moment */
+.answer-board .tile.peek:not(.typed):not(.space) {
+  animation: letter-peek 1.6s ease-in-out;
+}
+
+@keyframes letter-peek {
+  0%, 100% { color: transparent; transform: scale(1) rotate(0); }
+  25%, 75% { color: var(--ink-soft); transform: scale(1.14) rotate(-3deg); }
+  50% { color: var(--ink); transform: scale(1.2) rotate(3deg); }
+}
+
 /* ---------- calm mode & reduced motion ---------- */
 body.calm .tile.typed:not(.space),
 body.calm .word.word-done .tile {
   animation-duration: 0.6s;
+}
+
+body.calm .object-display {
+  animation-duration: 5s;
 }
 
 body.calm .toy {
@@ -444,5 +475,9 @@ body.calm .tile.current {
 
   .word.dance .tile {
     animation-duration: 2s;
+  }
+
+  .object-display {
+    animation: none;
   }
 }

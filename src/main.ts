@@ -11,6 +11,7 @@ import { sounds } from './audio/sounds';
 import type { AppContext, ScreenName } from './ui/context';
 import { renderHomeScreen } from './ui/home-screen';
 import { renderGameScreen } from './ui/game-screen';
+import { renderObjectsScreen } from './ui/objects-screen';
 import { renderSettingsScreen } from './ui/settings-screen';
 import { mountRadio } from './ui/radio';
 
@@ -26,6 +27,9 @@ const ctx: AppContext = {
         break;
       case 'game':
         renderGameScreen(ctx, params?.level ?? 0);
+        break;
+      case 'objects':
+        renderObjectsScreen(ctx);
         break;
       case 'settings':
         renderSettingsScreen(ctx);

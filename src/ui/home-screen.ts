@@ -67,6 +67,23 @@ export function renderHomeScreen(ctx: AppContext): void {
     }
     grid.appendChild(card);
   });
+
+  // "What is it?" game: always open — no stars, no locks, just for fun.
+  const objectsCard = document.createElement('button');
+  objectsCard.type = 'button';
+  objectsCard.className = 'level-card objects-card';
+  objectsCard.style.setProperty('--i', String(pack.levels.length));
+  objectsCard.innerHTML = `
+    <div class="card-emoji">🔍</div>
+    <div class="card-title"></div>
+    <div class="card-stars">🧸</div>`;
+  objectsCard.querySelector('.card-title')!.textContent = pack.ui.objectsTitle;
+  objectsCard.addEventListener('click', () => {
+    sounds.unlock();
+    sounds.wordChime();
+    ctx.navigate('objects');
+  });
+  grid.appendChild(objectsCard);
   screen.appendChild(grid);
 
   const mascot = createMascot();

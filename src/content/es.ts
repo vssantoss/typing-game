@@ -10,6 +10,8 @@ export const es: ContentPack = {
     next: 'Siguiente',
     typeIt: '¡Escribe la frase!',
     nowAnswer: '¡Ahora responde!',
+    objectsTitle: '¿Qué Es?',
+    objectsPrompt: '¿Qué es esto? ¡Escríbelo!',
     hint: 'Pista',
     stars: 'estrellas',
     levelComplete: '¡Nivel completado!',
@@ -115,5 +117,31 @@ export const es: ContentPack = {
         { sentence: 'El pirata encontró un cofre del tesoro. Estaba lleno de oro.', question: '¿Qué había en el cofre?', answer: 'oro', hint: [10] }
       ]
     }
+  ],
+  objects: [
+    { emoji: '⚽', name: 'pelota' },
+    { emoji: '☂️', name: 'paraguas' },
+    { emoji: '🍬', name: 'caramelo' },
+    { emoji: '🍎', name: 'manzana' },
+    { emoji: '🚗', name: 'carro' },
+    { emoji: '🏠', name: 'casa' },
+    { emoji: '☀️', name: 'sol' },
+    { emoji: '🌙', name: 'luna' },
+    { emoji: '⭐', name: 'estrella' },
+    { emoji: '🐶', name: 'perro' },
+    { emoji: '🐱', name: 'gato' },
+    { emoji: '🐟', name: 'pez' },
+    { emoji: '🦆', name: 'pato' },
+    { emoji: '📖', name: 'libro' },
+    { emoji: '🌸', name: 'flor' },
+    { emoji: '🌳', name: 'árbol' },
+    { emoji: '🎂', name: 'pastel' },
+    { emoji: '🍌', name: 'banana' },
+    { emoji: '🚲', name: 'bicicleta' },
+    { emoji: '🔑', name: 'llave' },
+    { emoji: '🧀', name: 'queso' },
+    { emoji: '🥛', name: 'leche' },
+    { emoji: '🦋', name: 'mariposa' },
+    { emoji: '🚀', name: 'cohete' }
   ]
 };

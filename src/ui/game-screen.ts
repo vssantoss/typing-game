@@ -10,7 +10,7 @@ import { showPlayground } from './reward-playground';
 
 const TILE_COLORS = ['#ff6b6b', '#f4a261', '#ffd166', '#06d6a0', '#4cc9f0', '#9b5de5', '#f15bb5'];
 
-interface Board {
+export interface Board {
   el: HTMLElement;
   /** Tile element per character index of the target string. */
   tiles: HTMLElement[];
@@ -18,7 +18,7 @@ interface Board {
   words: HTMLElement[];
 }
 
-function buildBoard(target: string, kind: 'sentence' | 'answer'): Board {
+export function buildBoard(target: string, kind: 'sentence' | 'answer'): Board {
   const el = document.createElement('div');
   el.className = `board ${kind}-board`;
   if (target.length > 34) el.classList.add('long');
@@ -55,7 +55,7 @@ function buildBoard(target: string, kind: 'sentence' | 'answer'): Board {
   return { el, tiles, words };
 }
 
-function setCaret(board: Board, index: number): void {
+export function setCaret(board: Board, index: number): void {
   board.tiles.forEach((t) => t.classList.remove('current'));
   board.tiles[index]?.classList.add('current');
 }
@@ -342,12 +342,12 @@ export function renderGameScreen(ctx: AppContext, levelIndex: number): void {
   startItem();
 }
 
-function pick<T>(arr: T[]): T {
+export function pick<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
 /** Fisher–Yates shuffle into a new array; the content pack stays untouched. */
-function shuffled<T>(arr: readonly T[]): T[] {
+export function shuffled<T>(arr: readonly T[]): T[] {
   const out = [...arr];
   for (let i = out.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));

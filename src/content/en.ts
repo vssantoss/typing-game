@@ -10,6 +10,8 @@ export const en: ContentPack = {
     next: 'Next',
     typeIt: 'Type the sentence!',
     nowAnswer: 'Now answer!',
+    objectsTitle: 'What Is It?',
+    objectsPrompt: 'What is this? Type it!',
     hint: 'Hint',
     stars: 'stars',
     levelComplete: 'Level complete!',
@@ -115,5 +117,31 @@ export const en: ContentPack = {
         { sentence: 'The pirate found a treasure chest. It was full of gold.', question: 'What was in the chest?', answer: 'gold', hint: [10] }
       ]
     }
+  ],
+  objects: [
+    { emoji: '⚽', name: 'ball' },
+    { emoji: '☂️', name: 'umbrella' },
+    { emoji: '🍬', name: 'candy' },
+    { emoji: '🍎', name: 'apple' },
+    { emoji: '🚗', name: 'car' },
+    { emoji: '🏠', name: 'house' },
+    { emoji: '☀️', name: 'sun' },
+    { emoji: '🌙', name: 'moon' },
+    { emoji: '⭐', name: 'star' },
+    { emoji: '🐶', name: 'dog' },
+    { emoji: '🐱', name: 'cat' },
+    { emoji: '🐟', name: 'fish' },
+    { emoji: '🦆', name: 'duck' },
+    { emoji: '📖', name: 'book' },
+    { emoji: '🌸', name: 'flower' },
+    { emoji: '🌳', name: 'tree' },
+    { emoji: '🎂', name: 'cake' },
+    { emoji: '🍌', name: 'banana' },
+    { emoji: '🚲', name: 'bike' },
+    { emoji: '🔑', name: 'key' },
+    { emoji: '🧀', name: 'cheese' },
+    { emoji: '🥛', name: 'milk' },
+    { emoji: '🦋', name: 'butterfly' },
+    { emoji: '🚀', name: 'rocket' }
   ]
 };
