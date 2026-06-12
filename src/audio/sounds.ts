@@ -141,6 +141,54 @@ class SoundKit {
     this.note(95, { dur: 0.08, type: 'triangle', gain: 0.1 });
   }
 
+  // ---- background music -----------------------------------------------------
+
+  private musicTimer: number | null = null;
+  private musicStep = 0;
+  private musicNextNoteTime = 0;
+
+  get musicPlaying(): boolean {
+    return this.musicTimer !== null;
+  }
+
+  /** Start the looping radio tune. Safe to call repeatedly. */
+  startMusic(): void {
+    if (this.musicTimer !== null) return;
+    this.unlock();
+    if (!this.ctx) return;
+    this.musicStep = 0;
+    this.musicNextNoteTime = this.ctx.currentTime + 0.05;
+    const tick = () => this.scheduleMusic();
+    tick();
+    this.musicTimer = window.setInterval(tick, 200);
+  }
+
+  stopMusic(): void {
+    if (this.musicTimer === null) return;
+    window.clearInterval(this.musicTimer);
+    this.musicTimer = null;
+  }
+
+  /**
+   * Lookahead scheduler: every interval tick, schedule the loop's notes up to
+   * half a second ahead at exact AudioContext times, so the tune stays on the
+   * beat regardless of timer jitter.
+   */
+  private scheduleMusic(): void {
+    if (!this.ctx) return;
+    const STEP = 0.27; // one eighth note ≈ 111 bpm — bouncy but not frantic
+    while (this.musicNextNoteTime < this.ctx.currentTime + 0.5) {
+      const at = Math.max(0, this.musicNextNoteTime - this.ctx.currentTime);
+      const melody = MELODY[this.musicStep % MELODY.length];
+      const bass = BASS[this.musicStep % BASS.length];
+      // Quiet on purpose: the typing clicks and reward sounds stay the stars.
+      if (melody) this.note(melody, { at, dur: 0.24, type: 'triangle', gain: 0.1 });
+      if (bass) this.note(bass, { at, dur: 0.3, type: 'sine', gain: 0.08 });
+      this.musicNextNoteTime += STEP;
+      this.musicStep++;
+    }
+  }
+
   // ---- reward playground toys ---------------------------------------------
 
   toy(name: ToyName): void {
@@ -175,6 +223,34 @@ class SoundKit {
     }
   }
 }
+
+// Radio tune: an original 8-bar music-box loop in C major. Each row is one
+// bar of eighth notes (null = rest); frequencies are in Hz.
+const C5 = 523.25, D5 = 587.33, E5 = 659.25, F5 = 698.46, G5 = 783.99, A5 = 880, C6 = 1046.5;
+const G2 = 98, A2 = 110, B2 = 123.47, C3 = 130.81, D3 = 146.83, E3 = 164.81, F3 = 174.61;
+
+const MELODY: (number | null)[] = [
+  C5, null, E5, null, G5, null, E5, null,
+  A5, null, G5, null, E5, null, null, null,
+  D5, null, E5, null, F5, null, D5, null,
+  E5, null, D5, null, C5, null, null, null,
+  C5, null, E5, null, G5, null, E5, null,
+  A5, null, C6, null, A5, null, G5, null,
+  F5, null, E5, null, D5, null, E5, null,
+  C5, null, null, null, null, null, null, null
+];
+
+// Oom-pah bass on the quarter notes (root–fifth), following the melody's chords.
+const BASS: (number | null)[] = [
+  C3, null, G2, null, C3, null, G2, null,
+  A2, null, E3, null, A2, null, E3, null,
+  D3, null, A2, null, D3, null, A2, null,
+  G2, null, D3, null, G2, null, B2, null,
+  C3, null, G2, null, C3, null, G2, null,
+  A2, null, E3, null, A2, null, E3, null,
+  F3, null, C3, null, G2, null, D3, null,
+  C3, null, G2, null, C3, null, G2, null
+];
 
 export type { ToyName };
 export const sounds = new SoundKit();

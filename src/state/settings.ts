@@ -16,6 +16,8 @@ export interface Settings {
   hintAfterMistakes: boolean;
   /** Slower, gentler animations. */
   calmMode: boolean;
+  /** Happy background music (the radio in the corner). */
+  music: boolean;
 }
 
 const KEY = 'vskids.settings.v1';
@@ -41,7 +43,8 @@ const defaults: Settings = {
   accentLenient: true,
   autoPunctuation: true,
   hintAfterMistakes: false,
-  calmMode: false
+  calmMode: false,
+  music: true
 };
 
 function load(): Settings {

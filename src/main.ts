@@ -12,6 +12,7 @@ import type { AppContext, ScreenName } from './ui/context';
 import { renderHomeScreen } from './ui/home-screen';
 import { renderGameScreen } from './ui/game-screen';
 import { renderSettingsScreen } from './ui/settings-screen';
+import { mountRadio } from './ui/radio';
 
 const root = document.getElementById('app')!;
 
@@ -83,7 +84,12 @@ document.body.classList.add(THEMES[Math.floor(Math.random() * THEMES.length)]);
 
 document.body.classList.toggle('calm', settings.calmMode);
 sounds.setVolume(settings.volume);
-// The AudioContext can only start from a user gesture.
-window.addEventListener('pointerdown', () => sounds.unlock(), { once: false });
+mountRadio();
+// The AudioContext can only start from a user gesture — the same gesture also
+// kicks off the radio tune (startMusic is a no-op while it's already playing).
+window.addEventListener('pointerdown', () => {
+  sounds.unlock();
+  if (settings.music) sounds.startMusic();
+});
 
 ctx.navigate('home');
