@@ -9,7 +9,7 @@
   <rect x="96" y="120" width="240" height="240" rx="52" fill="#fffdf7" transform="rotate(-6 216 240)"/>
   <text x="206" y="282" transform="rotate(-6 216 240)" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="170" font-weight="bold" fill="#ff6b6b" text-anchor="middle">T</text>
   <rect x="248" y="248" width="190" height="190" rx="44" fill="#fffdf7" transform="rotate(7 343 343)"/>
-  <text x="340" y="382" transform="rotate(7 343 343)" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="135" font-weight="bold" fill="#06d6a0" text-anchor="middle">t</text>
+  <text x="340" y="390" transform="rotate(7 343 343)" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="135" font-weight="bold" fill="#06d6a0" text-anchor="middle">P</text>
   <path d="M392 96 l14 34 34 14 -34 14 -14 34 -14 -34 -34 -14 34 -14z" fill="#fffdf7"/>
   <circle cx="118" cy="402" r="16" fill="#4cc9f0"/>
   <circle cx="86" cy="118" r="12" fill="#f15bb5"/>
