@@ -51,6 +51,23 @@ if ('serviceWorker' in navigator) {
   });
 }
 
+// Size the app to the visible area, not the window: when the mobile keyboard
+// opens it covers the bottom of the layout viewport, and without this the
+// mascot hides behind the keyboard and the stage centers on covered space.
+const vv = window.visualViewport;
+if (vv) {
+  const syncViewport = () => {
+    document.documentElement.style.setProperty('--app-height', `${Math.round(vv.height)}px`);
+    // Some browsers scroll the page to "reveal" the focused input when the
+    // keyboard opens; with the app sized to the visual viewport that scroll
+    // only misaligns everything, so pin the page back.
+    if (window.scrollY !== 0) window.scrollTo(0, 0);
+  };
+  vv.addEventListener('resize', syncViewport);
+  vv.addEventListener('scroll', syncViewport);
+  syncViewport();
+}
+
 // One background theme per visit, picked at random (classes in main.css).
 const THEMES = [
   'theme-golden',

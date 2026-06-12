@@ -22,7 +22,9 @@
 
 .hidden-input {
   position: fixed;
-  bottom: 0;
+  /* Top, not bottom: browsers scroll the page to keep a focused input above
+     the on-screen keyboard, and a bottom-anchored input triggers that jump. */
+  top: 0;
   left: 0;
   width: 12px;
   height: 12px;

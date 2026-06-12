@@ -144,7 +144,9 @@ body.theme-lemon {
 }
 
 #app {
-  height: 100%;
+  /* Tracks the visual viewport (set in main.ts) so the on-screen keyboard
+     shrinks the playable area instead of covering it. */
+  height: var(--app-height, 100%);
 }
 
 .screen {
