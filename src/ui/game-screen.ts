@@ -119,10 +119,21 @@ export function renderGameScreen(ctx: AppContext, levelIndex: number): void {
   };
   screen.addEventListener('pointerdown', (ev) => {
     sounds.unlock();
-    // Let real buttons handle their own clicks without stealing focus back
-    // mid-press; refocus right after.
-    if (!(ev.target instanceof HTMLButtonElement)) focusInput();
-    else window.setTimeout(focusInput, 50);
+    // Let real buttons and the mascot handle their own taps without stealing
+    // focus mid-press; refocus right after.
+    if ((ev.target as HTMLElement).closest('button, .mascot')) {
+      window.setTimeout(focusInput, 50);
+      return;
+    }
+    if (phase === 'reward') return;
+    // iOS hides the keyboard when the tap's default handling blurs the hidden
+    // input, then ignores the later out-of-gesture refocus — so block the
+    // default here and handle focus entirely inside the gesture.
+    ev.preventDefault();
+    // iOS also won't reopen a dismissed keyboard for focus() on an input that
+    // is already focused; cycling blur→focus within the gesture forces it.
+    if (document.activeElement === input) input.blur();
+    input.focus({ preventScroll: true });
   });
   input.addEventListener('blur', () => window.setTimeout(focusInput, 100));
 

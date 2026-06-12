@@ -97,4 +97,15 @@ const unlockAudio = () => {
   window.addEventListener(evt, unlockAudio)
 );
 
+// The 'playback' audio session keeps Web Audio alive when the game goes to
+// the background (like a music app would) — stop the tune when another app
+// takes over and bring it back when the game returns.
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) {
+    sounds.stopMusic();
+  } else if (settings.music) {
+    sounds.startMusic();
+  }
+});
+
 ctx.navigate('home');

@@ -184,6 +184,18 @@ class SoundKit {
   private scheduleMusic(): void {
     if (!this.ctx) return;
     const STEP = 0.27; // one eighth note ≈ 111 bpm — bouncy but not frantic
+    // Park while the context isn't running (iOS autoplay gate, a phone call):
+    // the clock is frozen, so scheduling now would burn through the tune
+    // silently. Re-anchored, the tune starts cleanly once audio is live.
+    if (this.ctx.state !== 'running') {
+      this.musicNextNoteTime = this.ctx.currentTime + 0.1;
+      return;
+    }
+    // If the clock ran past the schedule (background-tab throttling), skip
+    // ahead instead of cramming all the missed notes into one burst.
+    if (this.musicNextNoteTime < this.ctx.currentTime) {
+      this.musicNextNoteTime = this.ctx.currentTime + 0.1;
+    }
     while (this.musicNextNoteTime < this.ctx.currentTime + 0.5) {
       const at = Math.max(0, this.musicNextNoteTime - this.ctx.currentTime);
       const melody = MELODY[this.musicStep % MELODY.length];
