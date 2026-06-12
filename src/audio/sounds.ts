@@ -14,12 +14,19 @@ class SoundKit {
   /** Call from any user gesture; creates/resumes the AudioContext. */
   unlock(): void {
     if (!this.ctx) {
+      // iPhones route Web Audio through the ringer channel, so the hardware
+      // silent switch mutes the whole game. Declaring a 'playback' session
+      // (Safari 17+) routes it through the media channel, like a video.
+      const session = (navigator as Navigator & { audioSession?: { type: string } }).audioSession;
+      if (session) session.type = 'playback';
       this.ctx = new AudioContext();
       this.master = this.ctx.createGain();
       this.master.gain.value = this.volume;
       this.master.connect(this.ctx.destination);
     }
-    if (this.ctx.state === 'suspended') void this.ctx.resume();
+    // Covers 'suspended' and Safari's non-standard 'interrupted' (set after
+    // a phone call or Siri), which never recovers without an explicit resume.
+    if (this.ctx.state !== 'running') void this.ctx.resume();
   }
 
   setVolume(v: number): void {

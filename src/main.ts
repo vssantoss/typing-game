@@ -87,9 +87,14 @@ sounds.setVolume(settings.volume);
 mountRadio();
 // The AudioContext can only start from a user gesture — the same gesture also
 // kicks off the radio tune (startMusic is a no-op while it's already playing).
-window.addEventListener('pointerdown', () => {
+// iOS Safari only counts touchend/click/keydown as activation for audio, not
+// pointerdown, so listen to all of them; unlock is idempotent.
+const unlockAudio = () => {
   sounds.unlock();
   if (settings.music) sounds.startMusic();
-});
+};
+(['pointerdown', 'touchend', 'click', 'keydown'] as const).forEach((evt) =>
+  window.addEventListener(evt, unlockAudio)
+);
 
 ctx.navigate('home');
